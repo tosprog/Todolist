@@ -6,5 +6,5 @@ const app = express();
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-app.use('/tasks', taskRoute);
+app.use('/api/', taskRoute);
 module.exports = app;

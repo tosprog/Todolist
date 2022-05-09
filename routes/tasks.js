@@ -4,7 +4,7 @@ const connection = require('../connection');
 
 const router = express.Router();
 
-router.post('/create', (req,res,next) =>{
+router.post('/tasks/create', (req,res,next) =>{
     let tasks = req.body;
     query1 = "insert into tasks (task_name, task_description, task_priority, task_status) values (?,?,?,?)";
     connection.query(query1, [tasks.task_name, tasks.task_description, tasks.task_priority, tasks.task_status], (err,result)=>{
@@ -19,7 +19,7 @@ router.post('/create', (req,res,next) =>{
     });
 });
 
-router.get('/read', (req,res,next)=>{
+router.get('/tasks/read', (req,res,next)=>{
     var myquery = "select *from tasks";
     connection.query(myquery,(err, result)=>{
         if(!err)
@@ -34,7 +34,7 @@ router.get('/read', (req,res,next)=>{
 
 });
 
-router.get('/readone/:id', (req,res,next)=>{
+router.get('/tasks/readone/:id', (req,res,next)=>{
     const id = req.params.id;
     var myquery = `select *from tasks where id = ${id}`;
     connection.query(myquery,[id], (err, result)=>{
@@ -52,7 +52,7 @@ router.get('/readone/:id', (req,res,next)=>{
 });
 
 
-router.put('/update/:id', (req,res,next)=>{
+router.put('/tasks/update/:id', (req,res,next)=>{
     const id = req.params.id;    
     let tasks = req.body;
     var myquery = `update tasks set task_name=?,task_description=?,task_priority=?,task_status=? where id=${id}`;
@@ -72,7 +72,7 @@ router.put('/update/:id', (req,res,next)=>{
     });  
 });
 
-router.delete('/delete/:id', (req,res,next)=>{
+router.delete('/tasks/delete/:id', (req,res,next)=>{
     const id = req.params.id;
     const myquery = `delete from tasks where id =${id}`;
     connection.query(myquery, [id], (err,result)=>{
